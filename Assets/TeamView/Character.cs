@@ -10,6 +10,7 @@ public abstract class Character : ScriptableObject {
     public enum Faction { friend, enemy }
     public enum Profession { warrior, rogue, blackmage, whitemage }
     public ArrayList traits = new ArrayList();
+    public ArrayList personalities = new ArrayList();
     public CharacterIconScript battleIcon;
 
     public string firstName;
@@ -26,6 +27,7 @@ public abstract class Character : ScriptableObject {
     public int currentHealth = 100;
     public int maximumHealth = 100;
     protected int attackRolld20 = 0;
+    
 
     // Use this for initialization
     void Start() {
@@ -47,6 +49,7 @@ public abstract class Character : ScriptableObject {
         this.AssignPortrait();
         this.WeightStats();
         this.AssignRandomTraits();
+        this.AssignRandomPersonality();
     }
 
     abstract public void AssignPortrait();
@@ -60,6 +63,17 @@ public abstract class Character : ScriptableObject {
             if (!traits.Contains(key))
             {
                 traits.Add(key);
+            }
+        }
+    }
+
+    public void AssignRandomPersonality()
+    {
+        foreach (object key in ReferenceMaterial.RandomPersonalities(ReferenceMaterial.personalitiesDictionary).Take(Random.Range(1, 3)))
+        {
+            if (!personalities.Contains(key))
+            {
+                personalities.Add(key);
             }
         }
     }
@@ -285,7 +299,7 @@ public abstract class Character : ScriptableObject {
             }
             else
             {
-                bd.StartCoroutine(bd.MakeMessage(this, "Attacked " + target.FullName() + " for " + damageDealt + " damage!", target));
+                bd.StartCoroutine(bd.MakeMessage(this, FullName() + " attacked " + target.FullName() + " for " + damageDealt + " damage!", target));
             }
             if (target.currentHealth <= 0)
             {
@@ -294,7 +308,7 @@ public abstract class Character : ScriptableObject {
         }
         else
         {
-            bd.StartCoroutine(bd.MakeMessage(this, "Their attack missed!", target));
+            bd.StartCoroutine(bd.MakeMessage(this, FullName() + "'s attack missed " + target.FullName() + "!", target));
         }
     }
 
@@ -396,4 +410,19 @@ public abstract class Character : ScriptableObject {
     }
 
     public abstract void DailyHealth();
+
+    public string MakeNewsFeedMessage()
+    {
+        int willTalk = Random.Range(0, 2);
+        if (willTalk == 1)
+        {
+            return GenerateMessageFromPersonality((string)this.personalities[Random.Range(0, this.personalities.Count)]); 
+        }
+        else return "";
+    }
+
+    public string GenerateMessageFromPersonality(string personality)
+    {
+        return ReferenceMaterial.PickMessageForPersonality(personality);
+    }
 }

@@ -13,6 +13,7 @@ public class HomeScreenScript : MonoBehaviour {
     public Transform teamPanel;
     public Transform lineupPanel;
     public Transform leaguePanel;
+    public Transform newsfeedPanel;
     public static Team currentOpponentTeam;
     public static int currentOpponentTeamIndex = 0;
     public static List<Team> scheduleOfOpponents = new List<Team>() { };
@@ -65,6 +66,8 @@ public class HomeScreenScript : MonoBehaviour {
         leaguePanel.GetComponentInChildren<LeaguePanelScript>().quickUpdate();
         GameObject.Find("QuickStandings").GetComponent<Text>().text = leaguePanel.GetComponentInChildren<LeaguePanelScript>().playerPosition + " place: " + playerTeamName;
         GameObject.Find("HomePanel").GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "Next Match vs \n" + HomeScreenScript.teamList[0].currentOpponentTeam.name;
+        NewsFeedPanelScript nfpscript = newsfeedPanel.GetComponentInChildren<NewsFeedPanelScript>();
+        nfpscript.GenerateTeamMessages(teamList[0].roster);
 
 
     }

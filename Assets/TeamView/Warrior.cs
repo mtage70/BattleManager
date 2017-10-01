@@ -17,7 +17,14 @@ public class Warrior : Character {
 
     public override void AssignPortrait()
     {
-        portrait = Resources.Load<Sprite>("warriorIcon");
+        if (this.characterGender == Gender.male)
+        {
+            portrait = Resources.Load<Sprite>("warriorIconMale");
+        }
+        else
+        {
+            portrait = Resources.Load<Sprite>("warriorIconFemale");
+        }
     }
 
     public override void WeightStats()

@@ -17,7 +17,14 @@ public class BlackMage : Character {
 
     public override void AssignPortrait()
     {
-        portrait = Resources.Load<Sprite>("blackmageIcon");
+        if (this.characterGender == Gender.male)
+        {
+            portrait = Resources.Load<Sprite>("blackmageIconMale");
+        }
+        else
+        {
+            portrait = Resources.Load<Sprite>("blackmageIconFemale");
+        }
     }
 
     public override void WeightStats()

@@ -53,6 +53,13 @@ public class CharacterPlateScript : MonoBehaviour, IPointerDownHandler, IPointer
         gameObject.GetComponentInChildren<Slider>().value = character.currentHealth;
         gameObject.GetComponentInChildren<Text>().text = "" + firstName + " " + lastName;
         gameObject.GetComponentsInChildren<Image>()[1].sprite = portrait;
+        if (selectable) {
+            gameObject.GetComponentsInChildren<Image>()[1].GetComponentInChildren<Button>().enabled = true;
+            gameObject.GetComponentsInChildren<Image>()[1].GetComponentInChildren<Button>().onClick.AddListener(PortraitButtonOnClick);
+        }
+        else {
+            gameObject.GetComponentsInChildren<Image>()[1].GetComponentInChildren<Button>().enabled = false;
+        }
         switch (profession)
         {
             case Character.Profession.warrior:
@@ -77,27 +84,33 @@ public class CharacterPlateScript : MonoBehaviour, IPointerDownHandler, IPointer
     // Update is called once per frame
     void Update()
     {
-        if (holding)
-        {
-            timeMouseDown += Time.deltaTime;
-            if (timeMouseDown >= 1)
-            {
-                holding = false;
-                timeMouseDown = 0;
-                GameObject characterSheetPopup = Instantiate(characterSheetPrefab) as GameObject;
-                characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character);
-                if (selectable)
-                {
-                    characterSheetPopup.transform.SetParent(GameObject.Find("LineupPanel").transform, false);
-                }
-                else
-                {
-                    characterSheetPopup.transform.SetParent(GameObject.Find("TeamPanel").transform, false);
-                }
+        // if (holding)
+        // {
+        //     timeMouseDown += Time.deltaTime;
+        //     if (timeMouseDown >= 1)
+        //     {
+        //         holding = false;
+        //         timeMouseDown = 0;
+        //         GameObject characterSheetPopup = Instantiate(characterSheetPrefab) as GameObject;
+        //         characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character);
+        //         if (selectable)
+        //         {
+        //             characterSheetPopup.transform.SetParent(GameObject.Find("LineupPanel").transform, false);
+        //         }
+        //         else
+        //         {
+        //             characterSheetPopup.transform.SetParent(GameObject.Find("TeamPanel").transform, false);
+        //         }
 
-            }
-            print(timeMouseDown);
-        }
+        //     }
+        //     print(timeMouseDown);
+        // }
+    }
+
+    void PortraitButtonOnClick() {
+        GameObject characterSheetPopup = Instantiate(characterSheetPrefab) as GameObject;
+        characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character);
+        characterSheetPopup.transform.SetParent(GameObject.Find("LineupPanel").transform, false);
     }
 
     public static Canvas getCanvas(GameObject g)

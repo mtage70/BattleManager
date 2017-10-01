@@ -30,10 +30,17 @@ public class TraitEntryScript : MonoBehaviour {
         {
             ReferenceMaterial.traitsDictionary.TryGetValue(traitKey, out traitValue);
         }
-        else
+        else if (ReferenceMaterial.healerTraitsDictionary.ContainsKey(traitKey))
         {
             ReferenceMaterial.healerTraitsDictionary.TryGetValue(traitKey, out traitValue);
         }
+        else if (ReferenceMaterial.personalitiesDictionary.ContainsKey(traitKey))
+        {
+            List<string> valueList;
+            ReferenceMaterial.personalitiesDictionary.TryGetValue(traitKey, out valueList);
+            traitValue = valueList[0];
+        }
+        else traitValue = "unknown";
     }
 
     public void TraitButtonOnClick()

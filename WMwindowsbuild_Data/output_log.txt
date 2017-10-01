@@ -5,7 +5,7 @@ Direct3D:
     Renderer: NVIDIA GeForce GTX 960 (ID=0x1401)
     Vendor:   NVIDIA
     VRAM:     2016 MB
-    Driver:   21.21.13.7892
+    Driver:   22.21.13.8205
 Begin MonoManager ReloadAssembly
 Platform assembly: C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Managed\UnityEngine.dll (this message is harmless)
 Loading C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Managed\UnityEngine.dll into Unity Child Domain
@@ -17,16 +17,9 @@ Platform assembly: C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Ma
 Loading C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.858 seconds
+- Completed reload, in  1.142 seconds
 Platform assembly: C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\User\Documents\WarriorManager\WMwindowsbuild_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-<RI> Initialized touch support.
-UnloadTime: 80.461479 ms
-Setting up 4 worker threads for Enlighten.
-  Thread -> id: 1584 -> priority: 1 
-  Thread -> id: 3380 -> priority: 1 
-  Thread -> id: 28b4 -> priority: 1 
-  Thread -> id: 21f0 -> priority: 1 

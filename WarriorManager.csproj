@@ -97,6 +97,9 @@
     <Compile Include="Assets\LeagueTable\LeaguePanelScript.cs" />
     <Compile Include="Assets\LeagueTable\LeagueTablePointsComparer.cs" />
     <Compile Include="Assets\LeagueTable\TeamPlateScript.cs" />
+    <Compile Include="Assets\NewsFeedButtonScript.cs" />
+    <Compile Include="Assets\NewsFeedMessagePrefabScript.cs" />
+    <Compile Include="Assets\NewsFeedPanelScript.cs" />
     <Compile Include="Assets\PostBattleScene\ObidPrefabScript.cs" />
     <Compile Include="Assets\PostBattleScene\PostBattleDoneButtonScript.cs" />
     <Compile Include="Assets\PostBattleScene\PostBattleScript.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Assets\TeamView\TraitEntryScript.cs" />
     <Compile Include="Assets\TeamView\Warrior.cs" />
     <Compile Include="Assets\TeamView\WhiteMage.cs" />
+    <Compile Include="Assets\TraitPersonalityButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

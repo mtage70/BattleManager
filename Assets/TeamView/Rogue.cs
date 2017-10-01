@@ -16,7 +16,14 @@ public class Rogue : Character {
 
     public override void AssignPortrait()
     {
-        portrait = Resources.Load<Sprite>("rogueIcon");
+        if (this.characterGender == Gender.male)
+        {
+            portrait = Resources.Load<Sprite>("rogueIconMale");
+        }
+        else
+        {
+            portrait = Resources.Load<Sprite>("rogueIconFemale");
+        }
     }
 
     public override void WeightStats()

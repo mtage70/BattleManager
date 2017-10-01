@@ -172,7 +172,7 @@ public class BattleDirector : MonoBehaviour {
                     if (currentTurnHolder.isAlive())
                     {
                         currentTurnHolder.battleIcon.ActivateTurnGlow();
-                        StartCoroutine(MakeMessage(currentTurnHolder, "It's " + currentTurnHolder.FullName() + "'s turn!", currentTurnHolder));
+                        //StartCoroutine(MakeMessage(currentTurnHolder, "It's " + currentTurnHolder.FullName() + "'s turn!", currentTurnHolder));
                         yield return new WaitForSecondsRealtime(speed);
                         //enemy attacking player combatants
                         if (currentTurnHolder.characterFaction == Character.Faction.enemy)

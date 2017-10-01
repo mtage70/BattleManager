@@ -58,6 +58,12 @@ public class CharacterSheetScript : MonoBehaviour {
             traitEntry.GetComponent<TraitEntryScript>().Initialize(trait);
             traitEntry.transform.SetParent(GameObject.Find("TraitsContent").transform, false);
         }
+        foreach (string personality in character.personalities)
+        {
+            GameObject personalityEntry = Instantiate(traitEntryPrefab) as GameObject;
+            personalityEntry.GetComponent<TraitEntryScript>().Initialize(personality);
+            personalityEntry.transform.SetParent(GameObject.Find("PersonalityContent").transform, false);
+        }
 
 
 

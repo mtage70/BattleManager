@@ -59,7 +59,14 @@ public class WhiteMage : Character {
 
     public override void AssignPortrait()
     {
-        portrait = Resources.Load<Sprite>("whitemageIcon");
+        if (this.characterGender == Gender.male)
+        {
+            portrait = Resources.Load<Sprite>("whitemageIconMale");
+        }
+        else
+        {
+            portrait = Resources.Load<Sprite>("whitemageIconFemale");
+        }
     }
 
     public override void WeightStats()
