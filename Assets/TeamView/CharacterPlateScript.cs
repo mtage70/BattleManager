@@ -18,9 +18,11 @@ public class CharacterPlateScript : MonoBehaviour, IPointerDownHandler, IPointer
     Color defaultColor;
     bool holding = false;
     float timeMouseDown = 0;
+
+    public bool purchasable;
     
 
-    public void Initialize (Character pc, Button characterPanelButton, bool selectable)
+    public void Initialize (Character pc, Button characterPanelButton, bool selectable, bool purchasable = false)
     {
         character = pc;
         firstName = character.firstName;
@@ -31,6 +33,7 @@ public class CharacterPlateScript : MonoBehaviour, IPointerDownHandler, IPointer
         this.characterPanelButton.onClick.AddListener(CharacterPanelButtonOnClick);
         this.selectable = selectable;
         defaultColor = gameObject.GetComponent<Image>().color;
+        this.purchasable = purchasable;
     }
 
     public void Initialize (string first, string last, Sprite port, Character.Profession prof, Button characterPanelButton)
@@ -109,7 +112,7 @@ public class CharacterPlateScript : MonoBehaviour, IPointerDownHandler, IPointer
 
     void PortraitButtonOnClick() {
         GameObject characterSheetPopup = Instantiate(characterSheetPrefab) as GameObject;
-        characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character);
+        characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character, true);
         characterSheetPopup.transform.SetParent(GameObject.Find("LineupPanel").transform, false);
     }
 
@@ -159,7 +162,8 @@ public class CharacterPlateScript : MonoBehaviour, IPointerDownHandler, IPointer
         else
         {
             GameObject characterSheetPopup = Instantiate(characterSheetPrefab) as GameObject;
-            characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character);
+            print(purchasable);
+            characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character, purchasable);
             characterSheetPopup.transform.SetParent(GameObject.Find("TeamPanel").transform, false);
         }
         

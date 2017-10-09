@@ -33,6 +33,21 @@ public class TeamPanelScript : MonoBehaviour {
             characterPlate.transform.SetParent(gameObject.transform, false);
             //print("formatting " + i);
         }
+    }
 
+    public void formatScoutableFightersForTeamPanel()
+    {
+        foreach (Transform child in gameObject.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        for (int i = 0; i < HomeScreenScript.scoutableFighters.Count; i++)
+        {
+            Character pc = HomeScreenScript.scoutableFighters[i] as Character;
+            GameObject characterPlate = Instantiate(characterPlatePrefab) as GameObject;
+            characterPlate.GetComponent<CharacterPlateScript>().Initialize(pc, characterPlate.GetComponent<Button>(), false, true);
+            characterPlate.transform.SetParent(gameObject.transform, false);
+            //print("formatting " + i);
+        }
     }
 }

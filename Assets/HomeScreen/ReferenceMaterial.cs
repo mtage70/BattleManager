@@ -34,16 +34,48 @@ public class ReferenceMaterial:ScriptableObject {
         "No one even comes close to my skill!",
         "Heh, that last match was easy!",
         "Ez game ez life"
-
     };
 
+    public static List<string> HotHeadMessages = new List<string>() {
+        "This character is easily angered and volatile.",
+        "I'll crush their skulls!",
+        "WAAAAAAAAAAAAAGGGGGGHHHHH!",
+        "I'm bleeding! Oh. Nope not my blood.",
+        "YOU DARE STEP INTO THE ARENA? I'LL DRINK YOUR BLOOD FROM YOUR SKULL!"
+    };
+    public static List<string> TimidMessages = new List<string>() {
+        "This character doesn't speak up much.",
+        "I hope the next match goes okay.",
+        "Why do we have to fight?",
+        "Everyone is always so mean on here.",
+        "Being a pro is a lot of pressure..."
+    };
+
+    public static List<string> PartierMessages = new List<string>() {
+        "Every night is a party with this character.",
+        "Hit me up in Ivalen homies! Let's get wrecked!",
+        "Man what happened last night?",
+        "WOO! Win or lose party at the tavern after the match!",
+        "Woke up in the brothel, where are we fighting again?"
+    };
+
+    public static List<string> AmbitiousMessages = new List<string>() {
+        "This character wants to be the best there is.",
+        "I have to train harder! Back to the sparring ground!",
+        "All I do is work",
+        "Ten eggs and Sava Root ale is the breakfast for champions!",
+        "I will be the greatest fighter the game has ever seen!"
+    };
+
+
+
+
     public static Dictionary<string, List<string>> personalitiesDictionary = new Dictionary<string, List<string>> {
-        {"Show Boat", ShowBoatMessages}
-        //{ "Hot Head", "This character is easily angered." },
-       
-        // { "Timid", "This character doesn't speak up much." },
-        // { "Partier", "Every night is a party with this character." },
-        // { "Ambitious", "This character wants to be the best there is." }
+        {"Show Boat", ShowBoatMessages},
+        {"Hot Head", HotHeadMessages},
+        { "Timid", TimidMessages },
+        { "Partier", PartierMessages },
+        { "Ambitious", AmbitiousMessages }
     };
     
     

@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterSheetScript : MonoBehaviour {
+    public bool purchasable;
     Button closeButton;
+    public GameObject purchaseButton;
     public GameObject traitEntryPrefab;
+
+    public Character character;
 	// Use this for initialization
 	void Start () {
         closeButton = gameObject.GetComponentInChildren<Button>();
@@ -23,8 +27,9 @@ public class CharacterSheetScript : MonoBehaviour {
         gameObject.GetComponentInChildren<Image>().sprite = portrait;
         gameObject.GetComponentsInChildren<Text>()[1].text = profession;
     }
-    public void Initialize(Character character)
+    public void Initialize(Character character, bool purchasable = false)
     {
+        this.character = character;
         gameObject.GetComponentsInChildren<Text>()[0].text = character.FullName();
         gameObject.GetComponentsInChildren<Image>()[2].sprite = character.portrait;
         gameObject.GetComponentsInChildren<Text>()[1].text = "<b>" + character.overallRating + "</b>" + " " + character.characterProfession.ToString().ToUpper();
@@ -63,6 +68,13 @@ public class CharacterSheetScript : MonoBehaviour {
             GameObject personalityEntry = Instantiate(traitEntryPrefab) as GameObject;
             personalityEntry.GetComponent<TraitEntryScript>().Initialize(personality);
             personalityEntry.transform.SetParent(GameObject.Find("PersonalityContent").transform, false);
+        }
+
+        if (!purchasable) {
+            purchaseButton.SetActive(false);
+        }
+        else {
+            purchaseButton.GetComponentInChildren<Text>().text = "Buy For: " + this.character.value + " GP"; 
         }
 
 

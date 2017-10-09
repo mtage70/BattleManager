@@ -28,6 +28,7 @@ public abstract class Character : ScriptableObject {
     public int maximumHealth = 100;
     protected int attackRolld20 = 0;
     
+    public int value = 25;
 
     // Use this for initialization
     void Start() {

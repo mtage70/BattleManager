@@ -14,6 +14,8 @@ public class HomeScreenScript : MonoBehaviour {
     public Transform lineupPanel;
     public Transform leaguePanel;
     public Transform newsfeedPanel;
+
+    public static GameObject quickFinances;
     public static Team currentOpponentTeam;
     public static int currentOpponentTeamIndex = 0;
     public static List<Team> scheduleOfOpponents = new List<Team>() { };
@@ -22,7 +24,9 @@ public class HomeScreenScript : MonoBehaviour {
     public static int matchesPlayed = 0;
     public static string playerTeamName = "";
     public static ArrayList teamNames = new ArrayList() { "The Baelfos Brawlers", "The Shattered Veil Sanctum", "The Ivalen Kings", "The Madeirna Marauders", "The Tempest Keep Tide", "The Aldenar Roses", "The Gesia Gambit", "The Silphan Minstrels" };
-	// Use this for initialization
+	
+    public static List<Character> scoutableFighters = new List<Character>();
+    // Use this for initialization
 	void Start () {
         if (firstTimeStartup)
         {
@@ -55,7 +59,6 @@ public class HomeScreenScript : MonoBehaviour {
         }
         else
         {
-            RestoreRosterCount();
             matchesPlayed++;
             if (matchesPlayed == 60)
             {
@@ -63,13 +66,20 @@ public class HomeScreenScript : MonoBehaviour {
                 GameObject.Find("LeagueTableButton").GetComponent<LeagueButtonScript>().LeagueButtonOnClick();
             }
         }
+        scoutableFighters = GenerateWeeklyScoutableFighters();
         leaguePanel.GetComponentInChildren<LeaguePanelScript>().quickUpdate();
         GameObject.Find("QuickStandings").GetComponent<Text>().text = leaguePanel.GetComponentInChildren<LeaguePanelScript>().playerPosition + " place: " + playerTeamName;
+        quickFinances = GameObject.Find("QuickFinances");
+        GameObject.Find("QuickFinances").GetComponent<Text>().text = "Funds: " + teamList[0].funds + " GP";
         GameObject.Find("HomePanel").GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "Next Match vs \n" + HomeScreenScript.teamList[0].currentOpponentTeam.name;
         NewsFeedPanelScript nfpscript = newsfeedPanel.GetComponentInChildren<NewsFeedPanelScript>();
         nfpscript.GenerateTeamMessages(teamList[0].roster);
 
 
+    }
+
+    public static void updateQuickFinances() {
+        quickFinances.GetComponent<Text>().text = "Funds: " + teamList[0].funds + " GP";
     }
 
     public static void CreateSchedule()
@@ -152,11 +162,21 @@ public class HomeScreenScript : MonoBehaviour {
         t.name = name;
         t.roster = new ArrayList();
         t.points = 0;
+        t.funds = 100;
         for (int i = 0; i < 10; i++)
         {
             t.roster.Add(Character.CreateRandomCharacter(faction));
         }
         return t;
+    }
+
+    public List<Character> GenerateWeeklyScoutableFighters() {
+        List<Character> r = new List<Character>();
+        for (int i = 0; i < 3; i++)
+        {
+            r.Add(Character.CreateRandomCharacter(Character.Faction.friend));
+        }
+        return r;
     }
 
     public static void DailyHealing(ArrayList roster)

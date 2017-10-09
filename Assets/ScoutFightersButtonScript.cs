@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TeamButtonScript : MonoBehaviour {
+public class ScoutFightersButtonScript : MonoBehaviour {
 
     public Button scoutButton;
-    public Button teamButton;
+	public Button teamButton;
     public GameObject teamPanel;
     public GameObject homePanel;
     public GameObject lineupPanel;
@@ -17,9 +17,9 @@ public class TeamButtonScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Button tButton = teamButton.GetComponent<Button>();
-        tButton.onClick.AddListener(TeamButtonOnClick);
-        teamButton.GetComponent<Image>().color = deactivatedColor;
+        Button tButton = scoutButton.GetComponent<Button>();
+        tButton.onClick.AddListener(scoutButtonOnClick);
+        scoutButton.GetComponent<Image>().color = deactivatedColor;
     }
 
     // Update is called once per frame
@@ -28,12 +28,11 @@ public class TeamButtonScript : MonoBehaviour {
 
     }
 
-    void TeamButtonOnClick()
+    void scoutButtonOnClick()
     {
         if (active)
         {
             active = false;
-            scoutButton.GetComponent<ScoutFightersButtonScript>().active = false;
             teamButton.GetComponent<Image>().color = deactivatedColor;
             teamPanel.SetActive(false);
             homePanel.SetActive(true);
@@ -49,10 +48,11 @@ public class TeamButtonScript : MonoBehaviour {
             LineupPanelScript.chosenCount = 0;
             LineupPanelScript.chosenRoster.Clear();
             teamPanel.GetComponentInChildren<ScrollRect>().enabled = true;
-            teamPanel.GetComponentInChildren<TeamPanelScript>().formatPlayerRosterForTeamPanel();
-
+            teamPanel.GetComponentInChildren<TeamPanelScript>().formatScoutableFightersForTeamPanel();
+			teamButton.GetComponent<TeamButtonScript>().active = true;
 
         }
         
     }
 }
+

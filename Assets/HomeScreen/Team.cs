@@ -9,6 +9,8 @@ public class Team : ScriptableObject {
     public List<Team> scheduleOfOpponents;
     public Team currentOpponentTeam;
     public int matchesPlayed;
+
+    public int funds;
     // Use this for initialization
     void Start () {
 		

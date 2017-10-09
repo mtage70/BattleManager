@@ -50,6 +50,7 @@
      <Compile Include="Assets\BattleScreen\BattleEventScript.cs" />
      <Compile Include="Assets\BattleScreen\CharacterIconScript.cs" />
      <Compile Include="Assets\BattleScreen\InitiativeComparer.cs" />
+     <Compile Include="Assets\CharacterSheetPurchaseButtonScript.cs" />
      <Compile Include="Assets\HomeScreen\HomeScreenScript.cs" />
      <Compile Include="Assets\HomeScreen\ReferenceMaterial.cs" />
      <Compile Include="Assets\HomeScreen\StrategyButton.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\PostBattleScene\ObidPrefabScript.cs" />
      <Compile Include="Assets\PostBattleScene\PostBattleDoneButtonScript.cs" />
      <Compile Include="Assets\PostBattleScene\PostBattleScript.cs" />
+     <Compile Include="Assets\ScoutFightersButtonScript.cs" />
      <Compile Include="Assets\StartMenu\QuitGame.cs" />
      <Compile Include="Assets\StartMenu\StartButtonScript.cs" />
      <Compile Include="Assets\StartMenu\TeamSelectScript.cs" />

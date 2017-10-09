@@ -205,11 +205,13 @@ public class BattleDirector : MonoBehaviour {
         {
             StartCoroutine(MakeMessage((Character)playerCombatants[0], "Player wins!", (Character)playerCombatants[0]));
             HomeScreenScript.teamList[0].points += 3;
+            HomeScreenScript.teamList[0].funds += 25;
         }
         else
         {
             StartCoroutine(MakeMessage((Character)enemyCombatants[0], "Enemy wins!", (Character)enemyCombatants[0]));
             HomeScreenScript.teamList[0].currentOpponentTeam.points += 3;
+            HomeScreenScript.teamList[0].funds += 10;
         }
         yield return new WaitForSecondsRealtime(4 + speed);
         speed = 1;
