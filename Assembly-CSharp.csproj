@@ -66,6 +66,8 @@
      <Compile Include="Assets\PostBattleScene\ObidPrefabScript.cs" />
      <Compile Include="Assets\PostBattleScene\PostBattleDoneButtonScript.cs" />
      <Compile Include="Assets\PostBattleScene\PostBattleScript.cs" />
+     <Compile Include="Assets\SaveButtonScript.cs" />
+     <Compile Include="Assets\SaveLoadManager.cs" />
      <Compile Include="Assets\ScoutFightersButtonScript.cs" />
      <Compile Include="Assets\StartMenu\QuitGame.cs" />
      <Compile Include="Assets\StartMenu\StartButtonScript.cs" />

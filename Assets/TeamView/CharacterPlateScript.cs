@@ -112,7 +112,7 @@ public class CharacterPlateScript : MonoBehaviour, IPointerDownHandler, IPointer
 
     void PortraitButtonOnClick() {
         GameObject characterSheetPopup = Instantiate(characterSheetPrefab) as GameObject;
-        characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character, true);
+        characterSheetPopup.GetComponent<CharacterSheetScript>().Initialize(character, false);
         characterSheetPopup.transform.SetParent(GameObject.Find("LineupPanel").transform, false);
     }
 

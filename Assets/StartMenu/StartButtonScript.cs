@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class StartButtonScript : MonoBehaviour {
 
@@ -21,7 +23,19 @@ public class StartButtonScript : MonoBehaviour {
 
     void StartButtonClicked ()
     {
-        teamSelectionPanel.SetActive(true);
+        if (File.Exists(Application.persistentDataPath + "/teamList.sav")){
+            HomeScreenScript.teamList = SaveLoadManager.LoadTeamList();
+            foreach(Team t in HomeScreenScript.teamList) {
+                print(t.name);
+            }
+            SaveLoadManager.LoadSchedule1();
+            SaveLoadManager.LoadSchedule2();
+            SceneManager.LoadScene("HomeScreen");
+        }
+        else {
+            teamSelectionPanel.SetActive(true);
+        }
+            
         
     }
 }

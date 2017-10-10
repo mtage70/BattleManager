@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Team : ScriptableObject {
     public string name;
@@ -23,5 +24,19 @@ public class Team : ScriptableObject {
 
     public void Initialize()
     {
+    }
+
+    public Team CreateSpecificTeam(TeamData td) {
+        Team temp = new Team();
+        temp.name = td.name;
+        temp.points = td.points;
+        temp.roster = new ArrayList();
+        foreach(CharacterData cd in td.cldata) {
+            temp.roster.Add(Character.CreateSpecificCharacter(cd));
+        }
+        
+        temp.matchesPlayed = td.matchesPlayed;
+        temp.funds = td.funds;
+        return temp;
     }
 }

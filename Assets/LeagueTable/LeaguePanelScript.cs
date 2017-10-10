@@ -26,7 +26,11 @@ public class LeaguePanelScript : MonoBehaviour {
     public void quickUpdate()
     {
         pointSortedTeamList.Clear();
-        foreach (Team t in HomeScreenScript.teamList)
+        foreach (Team t in HomeScreenScript.scheduleList1)
+        {
+            pointSortedTeamList.Add(t);
+        }
+        foreach (Team t in HomeScreenScript.scheduleList2)
         {
             pointSortedTeamList.Add(t);
         }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Collections;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 public class HomeScreenScript : MonoBehaviour {
     public static bool firstTimeStartup = true;
@@ -30,32 +31,32 @@ public class HomeScreenScript : MonoBehaviour {
 	void Start () {
         if (firstTimeStartup)
         {
-            teamNames.Remove(playerTeamName);
-            TeamPanelScript tpScript = teamPanel.GetComponent<TeamPanelScript>();
-            teamList.Add(CreateATeam(playerTeamName, Character.Faction.friend));
-            int rand = 0;
-            for (int i = 0; i < 7; i++)
-            {
-                rand = Random.Range(0, teamNames.Count);
-                teamList.Add(CreateATeam((string)teamNames[rand], Character.Faction.enemy));
-                teamNames.RemoveAt(rand);
+            
+            if (!File.Exists(Application.persistentDataPath + "/teamList.sav")) {
+                teamNames.Remove(playerTeamName);
+                teamList.Add(CreateATeam(playerTeamName, Character.Faction.friend));
+                int rand = 0;
+                for (int i = 0; i < 7; i++)
+                {
+                    rand = Random.Range(0, teamNames.Count);
+                    teamList.Add(CreateATeam((string)teamNames[rand], Character.Faction.enemy));
+                    teamNames.RemoveAt(rand);
+                }
             }
-            firstTimeStartup = false;
-            foreach (Team t in scheduleOfOpponents)
-            {
-                print(t.name);
-            }
-            //populate two schedule lists
-            for (int i = 0; i < teamList.Count/2; i++)
-            {
-                scheduleList1.Add(teamList[i]);
-            }
-            for (int i = teamList.Count/2; i < teamList.Count; i++)
-            {
-                scheduleList2.Add(teamList[i]);
+            if (!File.Exists(Application.persistentDataPath + "/schedule1.sav")) {
+                //populate two schedule lists
+                for (int i = 0; i < teamList.Count/2; i++)
+                {
+                    scheduleList1.Add(teamList[i]);
+                }
+                for (int i = teamList.Count/2; i < teamList.Count; i++)
+                {
+                    scheduleList2.Add(teamList[i]);
+                }
             }
             CreateSchedule();
-
+            firstTimeStartup = false;
+            playerTeamName = teamList[0].name;
         }
         else
         {
@@ -65,17 +66,20 @@ public class HomeScreenScript : MonoBehaviour {
                 print("NEW SEASON");
                 GameObject.Find("LeagueTableButton").GetComponent<LeagueButtonScript>().LeagueButtonOnClick();
             }
+            
         }
         scoutableFighters = GenerateWeeklyScoutableFighters();
         leaguePanel.GetComponentInChildren<LeaguePanelScript>().quickUpdate();
         GameObject.Find("QuickStandings").GetComponent<Text>().text = leaguePanel.GetComponentInChildren<LeaguePanelScript>().playerPosition + " place: " + playerTeamName;
         quickFinances = GameObject.Find("QuickFinances");
         GameObject.Find("QuickFinances").GetComponent<Text>().text = "Funds: " + teamList[0].funds + " GP";
-        GameObject.Find("HomePanel").GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "Next Match vs \n" + HomeScreenScript.teamList[0].currentOpponentTeam.name;
+
+        GameObject.Find("NextMatchButton").GetComponentInChildren<Text>().text = "Next Match vs \n" + HomeScreenScript.teamList[0].currentOpponentTeam.name;
         NewsFeedPanelScript nfpscript = newsfeedPanel.GetComponentInChildren<NewsFeedPanelScript>();
         nfpscript.GenerateTeamMessages(teamList[0].roster);
-
-
+        SaveLoadManager.SaveSchedule1();
+        SaveLoadManager.SaveSchedule2();
+        SaveLoadManager.SaveTeamList(teamList);
     }
 
     public static void updateQuickFinances() {
@@ -84,11 +88,18 @@ public class HomeScreenScript : MonoBehaviour {
 
     public static void CreateSchedule()
     {
-
+        foreach(Team t in scheduleList1){
+            print(t.name);
+        }
+        foreach(Team t in scheduleList2){
+            print(t.name);
+        }
         for (int i = 0; i < scheduleList1.Count; i++)
         {
             scheduleList1[i].currentOpponentTeam = scheduleList2[i];
+            print(scheduleList1[i].currentOpponentTeam.name);
         }
+        teamList[0].currentOpponentTeam = scheduleList1[0].currentOpponentTeam;
     }
     public static void UpdateSchedule()
     {
@@ -111,6 +122,7 @@ public class HomeScreenScript : MonoBehaviour {
             scheduleList1[i].currentOpponentTeam = scheduleList2[i];
             print(scheduleList1[i].name + " is playing " + scheduleList2[i].name);
         }
+        teamList[0].currentOpponentTeam = scheduleList1[0].currentOpponentTeam;
         
     }
 

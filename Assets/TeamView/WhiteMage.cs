@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WhiteMage : Character {
-    int healThreshold = 0;
+    public int healThreshold = 0;
     public int healReserves = 0;
     public int healReservesMax = 0;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -57,8 +58,16 @@ public class WhiteMage : Character {
         base.Initialize(first, last, gender, prof, faction);
     }
 
+    public override void Initialize(CharacterData cd) {
+        healReserves = cd.healReserves;
+        healThreshold = cd.healThreshold;
+        healReservesMax = cd.healReservesMax;
+        base.Initialize(cd);
+    }
+
     public override void AssignPortrait()
     {
+        
         if (this.characterGender == Gender.male)
         {
             portrait = Resources.Load<Sprite>("whitemageIconMale");

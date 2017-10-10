@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class QuitGame : MonoBehaviour {
 
@@ -19,7 +20,11 @@ public class QuitGame : MonoBehaviour {
 
     void TaskOnClick ()
     {
-        Application.Quit();
+        File.Delete(Application.persistentDataPath + "/teamList.sav");
+        File.Delete(Application.persistentDataPath + "/schedule1.sav");
+        File.Delete(Application.persistentDataPath + "/schedule2.sav");
+
+
     }
     
 }

@@ -40,6 +40,8 @@ public abstract class Character : ScriptableObject {
 
     }
 
+
+
     public virtual void Initialize(string first, string last, Gender gender, Profession prof, Faction faction)
     {
         firstName = first;
@@ -51,6 +53,23 @@ public abstract class Character : ScriptableObject {
         this.WeightStats();
         this.AssignRandomTraits();
         this.AssignRandomPersonality();
+    }
+
+    public virtual void Initialize(CharacterData cd) {
+        firstName = cd.firstName;
+        lastName = cd.lastName;
+        characterGender = cd.characterGender;
+        characterProfession = cd.characterProfession;
+        characterFaction = cd.characterFaction;
+        this.AssignPortrait();
+        strength = cd.strength;
+        skill = cd.skill;
+        wisdom = cd.wisdom;
+        overallRating = cd.overallRating;
+        currentHealth = cd.currentHealth;
+        maximumHealth = cd.maximumHealth;
+        traits = cd.traits;
+        personalities = cd.personalities;
     }
 
     abstract public void AssignPortrait();
@@ -137,6 +156,30 @@ public abstract class Character : ScriptableObject {
         temp.Initialize(first, last, (Character.Gender)genderVal, (Character.Profession)professionVal, faction);
         return temp;
 
+    }
+
+    public static Character CreateSpecificCharacter(CharacterData cd) {
+        Character temp;
+        switch (cd.characterProfession)
+        {
+            case Character.Profession.warrior:
+                temp = new Warrior();
+                break;
+            case Character.Profession.rogue:
+                temp = new Rogue();
+                break;
+            case Character.Profession.blackmage:
+                temp = new BlackMage();
+                break;
+            case Character.Profession.whitemage:
+                temp = new WhiteMage();
+                break;
+            default:
+                temp = new Rogue();
+                break;
+        }
+        temp.Initialize(cd);
+        return temp;
     }
 
     public void rollForInitiative()
