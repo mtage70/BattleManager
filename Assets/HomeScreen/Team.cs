@@ -10,6 +10,7 @@ public class Team : ScriptableObject {
     public List<Team> scheduleOfOpponents;
     public Team currentOpponentTeam;
     public int matchesPlayed;
+    public Dictionary<int, string> trophies;
 
     public int funds;
     // Use this for initialization
@@ -38,5 +39,9 @@ public class Team : ScriptableObject {
         temp.matchesPlayed = td.matchesPlayed;
         temp.funds = td.funds;
         return temp;
+    }
+
+    public void addTrophy(int season, string tier) {
+        this.trophies.Add(season, tier);
     }
 }

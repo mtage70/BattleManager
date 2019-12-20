@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Collections;
 using System.Runtime.CompilerServices;
 using System.IO;
 
@@ -26,6 +25,7 @@ public class HomeScreenScript : MonoBehaviour {
     public static string playerTeamName = "";
     public static ArrayList teamNames = new ArrayList() { "The Baelfos Brawlers", "The Shattered Veil Sanctum", "The Ivalen Kings", "The Madeirna Marauders", "The Tempest Keep Tide", "The Aldenar Roses", "The Gesia Gambit", "The Silphan Minstrels" };
 	
+    public static int seasonCount;
     public static List<Character> scoutableFighters = new List<Character>();
     // Use this for initialization
 	void Start () {
@@ -65,6 +65,12 @@ public class HomeScreenScript : MonoBehaviour {
             {
                 print("NEW SEASON");
                 GameObject.Find("LeagueTableButton").GetComponent<LeagueButtonScript>().LeagueButtonOnClick();
+                if (teamList[0] == (Team)leaguePanel.GetComponent<LeaguePanelScript>().pointSortedTeamList[0])
+                {
+                    teamList[0].addTrophy(seasonCount, "Gold");
+                }
+
+                seasonCount++;
             }
             
         }
